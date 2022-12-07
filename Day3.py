@@ -298,7 +298,7 @@ WcZcNWlcMjBQpzNTqVBp
 DpLPZLDDlcgmDmhVgfgfWWRwhwwt
 VrVMdbCrrBTjCMQQtMwQNSqMQW
 VCBHdJHdvrrFsbsdrBJTdTzZcpmZGDGPlmzmlccFDZDn'''
-def func(s):
+def func1(s):
     sacks = s.split("\n")
     letters = []
     sum = 0
@@ -316,4 +316,30 @@ def func(s):
         else:
             sum = sum + ord(c) - ord('a') + 1
     return sum
-print(func(input))
+def func2(s):
+    sacks = s.split("\n")
+    letters = []
+    sum = 0
+    counts = {}
+    d = {}
+    for x in sacks:
+        initlen = len(letters)
+        for c in x:
+            d[c] = [True, d.get(c, [False, 0])[1]]
+        for key in d:
+            if d[key][0]:
+                d[key][1] = d[key][1] + 1
+                if d[key][1]==3:
+                    letters.append(key)
+        for key in d:
+            d[key][0] = False
+            if initlen != len(letters):
+                d[key][1] = 0
+    for c in letters:
+        if ord(c) < ord('a'):
+            sum = sum + ord(c) - ord('A') + 1 + 26
+        else:
+            sum = sum + ord(c) - ord('a') + 1
+    return sum
+print(func1(input))
+print(func2(input))
